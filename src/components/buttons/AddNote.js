@@ -8,8 +8,8 @@ const showToast = () => {
     ToastAndroid.show('Adicionar nova nota', ToastAndroid.SHORT);
 }
 
-const AddNote = () =>
-    <TouchableOpacity onLongPress={showToast} activeOpacity = {0.5} style={styles.container} onPress={() => { }}>
+const AddNote = (props) =>
+    <TouchableOpacity  activeOpacity = {0.5} style={styles.container} onPress={() => {props.navigation.navigate('newNote') }}>
         <Icon name="add" size={40} color="#fff" />
     </TouchableOpacity>
 

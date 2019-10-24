@@ -93,7 +93,7 @@ export default class Lista extends Component {
         </View>
         {/* Absolute buttons */}
         <TotalNote />
-        <AddNote />
+        <AddNote navigation = {this.props.navigation}/>
       </View>
     )
   }

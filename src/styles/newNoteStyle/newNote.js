@@ -3,14 +3,10 @@ export default StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: '#4b6a96',
-        justifyContent: 'center',
-        alignItems: 'center'
     },
     content: {
-        height: Math.round(Dimensions.get('window').height)*0.5,
         backgroundColor: '#fff',
-        width: '90%',
-        borderRadius: 10
+        flex:1, 
     },
     titleText:{
         fontWeight: 'bold',
