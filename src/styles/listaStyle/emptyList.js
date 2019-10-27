@@ -5,16 +5,16 @@ export default StyleSheet.create({
         width: '80%',
         borderWidth: 1,
         borderColor: '#4b6a96',
-        backgroundColor: '#9cbcdb',
+        backgroundColor: '#24a0ed',
         height: 100,
         justifyContent: 'center',
-        borderRadius: 5
+        borderRadius: 5,
+        overflow: 'hidden'
     },
     text: {
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 25,
-        
         color: '#fff',
         
     }

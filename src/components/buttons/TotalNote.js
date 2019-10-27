@@ -11,7 +11,7 @@ const showToast = () => {
 
 
 const ButtonAdd = (props) =>
-    <TouchableOpacity onLongPress={showToast} activeOpacity={0.5} style={styles.container} onPress={() => { }}>
+    <TouchableOpacity  activeOpacity={0.5} style={styles.container} onPress={() => {showToast() }}>
         <Icon name="notifications" size={30} color="#fff" />
         <View style={styles.badge}>
             <Text style = {styles.badgeText}> {props.notes.length} </Text>

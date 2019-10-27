@@ -24,7 +24,10 @@ export default StyleSheet.create({
         marginHorizontal: 15,
         marginTop: 5,
         borderRadius: 5,
-        paddingLeft: 10
+        paddingLeft: 10,
+        paddingBottom: 2,
+        paddingTop: 10,
+        textAlignVertical: 'top',
     },
     submitButton: {
         backgroundColor: '#24a0ed',
@@ -36,7 +39,8 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-        height: 40,
+        height: 50,
+        alignItems: 'center'
     },
     textButton:{
         fontSize: 20,

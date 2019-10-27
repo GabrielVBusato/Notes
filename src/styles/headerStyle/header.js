@@ -3,16 +3,17 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
         width: '100%',
-        height: 55,
-        backgroundColor: '#4b6a96',
+        height: 80,
         justifyContent: 'center',
-        borderBottomLeftRadius: 60,
-        flexDirection: 'row'
+        borderBottomWidth: 0.5,
+        backgroundColor: '#24a0ed'
     },
     textHeader:{
         color: '#fff',
-        fontSize: 25,
-        fontWeight: 'bold',
-        alignSelf: 'center'
-    }
+        fontSize: 32,
+        fontFamily: "AntDesign",
+        marginLeft: 10,
+        textDecorationLine: 'underline'
+    },
+    
 })
