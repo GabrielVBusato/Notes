@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, FlatList, Animated, Easing, Modal, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { View, FlatList, Modal, Text, StatusBar, TouchableOpacity } from 'react-native';
 import styles from '../styles/listaStyle/lista'
 import { TotalNote, AddNote } from '../components/buttons/index'
 import footerStyle from '../styles/listaStyle/footer'
@@ -18,31 +18,24 @@ import { TextInput } from 'react-native-gesture-handler';
 
 class Lista extends Component {
 
-  animated = new Animated.Value(0);
-
   state = {
     modal: false,
     editedTitle: '',
-    editedDescription: ''
+    editedDescription: '',
+    mode: 'edit'
   }
 
-  animate() {
-    Animated.timing(this.animated, {
-      toValue: 1,
-      duration: 1000,
-      easing: Easing.bounce,
-    }).start();
-  }
-
-  componentDidMount() {
-    if (this.props.notes.length === 0) {
-      this.animate()
-    }
-  }
-
-  showModal = () => {
+  showEditModal = () => {
     this.setState({
       modal: true,
+      mode: 'edit'
+    })
+  }
+
+  showDescModal = () => {
+    this.setState({
+      modal: true,
+      mode: 'desc'
     })
   }
 
@@ -53,21 +46,9 @@ class Lista extends Component {
   }
 
   render() {
-    const opacity = this.animated.interpolate({
-      inputRange: [0, 1],
-      outputRange: [1, 1]
-    });
-
-    const translateX = this.animated.interpolate({
-      inputRange: [0, 1],
-      outputRange: [-500, 1]
-    });
-
-    const transform = [{ translateX }];
-
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor = '#0d86d1' />
+        <StatusBar backgroundColor='#0d86d1' />
         <Header />
         {
           <Modal
@@ -80,39 +61,48 @@ class Lista extends Component {
             <TouchableOpacity
               onPressOut={this.dismissModal} style={modalStyle.modalWrapper} activeOpacity={1}>
               <TouchableOpacity activeOpacity={1} onPress={() => { }}>
-                <View style={modalStyle.contentContainer}>
-                  <Text style={modalStyle.titleText}>Editar nota</Text>
-                  <View style={modalStyle.inputContainer}>
-                    <Text style={modalStyle.textTitle}> Título </Text>
-                    <TextInput onChangeText={(text) => {
-                      this.setState({
-                        ...this.state,
-                        editedTitle: text
-                      })
-                    }} placeholder='Digite o título da nota...' style={modalStyle.inputTitle}>{this.props.activeNote.title}</TextInput>
-                    <Text style={[modalStyle.textTitle, { marginTop: 10 }]}> Descrição </Text>
-                    <TextInput onChangeText={(text) => {
-                      this.setState({
-                        ...this.state,
-                        editedDescription: text
-                      })
-                    }} placeholder='Digite a descrição para a nota...' maxLength={150} multiline={true} maxHeight={50} style={modalStyle.descriptionInput}>{this.props.activeNote.description}</TextInput>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                      <TouchableOpacity style={modalStyle.submitButton} activeOpacity={0.5} onPress={() => {
-                        this.props.editNote({
-                          ...this.props.activeNote,
-                          title: this.state.editedTitle === ''? this.props.activeNote.title : this.state.editedTitle,
-                          description: this.state.editedDescription === '' ? this.props.activeNote.description : this.state.editedDescription
-                        }); this.dismissModal()
-                      }}>
-                         <Text style={modalStyle.textButton}>Confirmar</Text>    
+                {
+                  this.state.mode === 'edit' ?
+                    <View style={modalStyle.contentContainer}>
+                      <Text style={modalStyle.titleText}>Editar nota</Text>
+                      <View style={modalStyle.inputContainer}>
+                        <Text style={modalStyle.textTitle}> Título </Text>
+                        <TextInput maxLength={10} selectTextOnFocus onChangeText={(text) => {
+                          this.setState({
+                            ...this.state,
+                            editedTitle: text
+                          })
+                        }} placeholder='Digite o título da nota...' style={modalStyle.inputTitle}>{this.props.activeNote.title}</TextInput>
+                        <Text style={[modalStyle.textTitle, { marginTop: 10 }]}> Descrição </Text>
+                        <TextInput selectTextOnFocus onChangeText={(text) => {
+                          this.setState({
+                            ...this.state,
+                            editedDescription: text
+                          })
+                        }} placeholder='Digite a descrição para a nota...' maxLength={150} multiline={true} maxHeight={50} style={modalStyle.descriptionInput}>{this.props.activeNote.description}</TextInput>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                          <TouchableOpacity style={modalStyle.submitButton} activeOpacity={0.5} onPress={() => {
+                            this.props.editNote({
+                              ...this.props.activeNote,
+                              title: this.state.editedTitle === '' ? this.props.activeNote.title : this.state.editedTitle,
+                              description: this.state.editedDescription === '' ? this.props.activeNote.description : this.state.editedDescription
+                            }); this.dismissModal()
+                          }}>
+                            <Text style={modalStyle.textButton}>Confirmar</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity style={modalStyle.submitButton} activeOpacity={0.5} onPress={this.dismissModal}>
+                            <Text style={modalStyle.textButton}>Cancelar</Text>
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    </View> :
+                    <View style={modalStyle.contentContainer}>
+                      <Text style={modalStyle.titleText}>Descrição</Text>
+                      <Text style={modalStyle.descriptionShow}>{this.props.activeNote.description}</Text>
+                      <TouchableOpacity style={[modalStyle.submitButton, {position: 'absolute', bottom: -25, elevation: 10}]} activeOpacity={0.5} onPress={this.dismissModal}>
+                        <Text style={modalStyle.textButton}>Fechar</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity style={modalStyle.submitButton} activeOpacity={0.5} onPress={this.dismissModal}>
-                          <Text style={modalStyle.textButton}>Cancelar</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
+                    </View>}
               </TouchableOpacity>
             </TouchableOpacity>
           </Modal>}
@@ -120,14 +110,14 @@ class Lista extends Component {
           style={{ backgroundColor: '#fff', }}
           contentContainerStyle={this.props.notes.length === 0 && { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(16, 28, 158, 0.1)' }}
           data={this.props.notes}
-          renderItem={({ item }) => <Note showModal={this.showModal} item={item} />}
+          renderItem={({ item }) => <Note showModal={{ edit: this.showEditModal, desc: this.showDescModal }} item={item} />}
           keyExtractor={(_, index) => index.toString()}
           showsVerticalScrollIndicator={false}
           ListFooterComponent={<View />}
           ListFooterComponentStyle={footerStyle.footer}
           ListEmptyComponent={
             <View style={emptyList.container}>
-              <Animated.Text style={[emptyList.text, { transform, opacity }]}> Você não possui notas!  </Animated.Text>
+              <Text style={emptyList.text}> Você não possui notas!  </Text>
             </View>
           }
         />

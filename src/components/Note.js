@@ -38,14 +38,15 @@ const Note = (props) =>
             <Text style={styles.createdAtText}>{props.item.data}</Text>
         </View>
         <View style={styles.titleContainer}>
-            <TouchableOpacity onPress={() => { }} onLongPress={() => showToast('Mostrar descrição da nota')}>
+            <TouchableOpacity onPress={() => { props.showModal.desc() }} onLongPress={() => showToast('Mostrar descrição da nota')}>
                 <Text numberOfLines={2} style={styles.titleNote}>{props.item.title}</Text>
             </TouchableOpacity>
             <View style={styles.icons}>
-                <TouchableOpacity onPress={() => { props.setActiveNote(props.item) }} onLongPress={() => showToast('Mostrar descrição da nota')}>
+                {console.log(props.activeNote)}
+                <TouchableOpacity onPressOut={() => { props.setActiveNote(props.item); props.showModal.desc() }} onLongPress={() => showToast('Mostrar descrição da nota')}>
                     <Icon name="description" size={25} color="rgba(52, 52, 52, 0.7)" />
                 </TouchableOpacity >
-                <TouchableOpacity onPress={() => { props.setActiveNote(props.item); props.showModal() }} onLongPress={() => showToast('Editar nota')}>
+                <TouchableOpacity onPress={() => { props.setActiveNote(props.item); props.showModal.edit() }} onLongPress={() => showToast('Editar nota')}>
                     <Icon name="edit" size={25} color="rgba(52, 52, 52, 0.7)" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => onPressDelete(props)} onLongPress={() => showToast('Deletar nota')}>
@@ -59,6 +60,7 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators(Actions, dispatch);
 
 const mapStateToProps = state => ({
+    activeNote: state.activeNote
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Note);

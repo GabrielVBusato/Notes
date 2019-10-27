@@ -22,7 +22,6 @@ export default StyleSheet.create({
         width: screenWidth*0.8,
         borderRadius: 8,
         elevation: 10,
-        overflow: 'hidden',
         zIndex: 101
     },
     titleText: {
@@ -72,5 +71,10 @@ export default StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: '#fff'
+    },
+    descriptionShow: {
+        fontSize: 18,
+        padding: 10,
+        paddingLeft: 20
     }
 })

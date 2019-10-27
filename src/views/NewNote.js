@@ -53,6 +53,8 @@ class NewNote extends Component {
                 <KeyboardAvoidingView behavior="padding" enabled style={content}  >
                     <Text style={titleText}> Título da nota <Text style={{ color: 'red' }}>*</Text> </Text>
                     <TextInput
+                         maxLength= {10}
+                        selectTextOnFocus
                         editable={this.state.editable}
                         onFocus={() => {
                             this.setState({

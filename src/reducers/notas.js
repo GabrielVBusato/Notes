@@ -1,3 +1,5 @@
+import { Alert } from 'react-native';
+
 const INITIAL_STATE = {
     activeNote: [],
     notes: [],
@@ -14,7 +16,7 @@ export default function notes(state = INITIAL_STATE, actions) {
         case "EDIT_NOTE": {
             let notesArray = state.notes;
             notesArray[state.notes.findIndex((x) => x.index === state.activeNote.index)] = actions.note;
-            return { ...state, notes: notesArray}
+            return { ...state, notes: notesArray }
         }
         case "SET_ACTIVE_NOTE":
             return { ...state, activeNote: actions.note }
