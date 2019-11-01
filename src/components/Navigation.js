@@ -1,12 +1,18 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import { Lista, NewNote } from '../views/index'
+import { Lista, NewNote, SplashScreen } from '../views/index'
 
 const Stack = createStackNavigator({
     main: {
         screen: Lista,
         navigationOptions: {
             headerShown: false
+        }
+    },
+    splashScreen: {
+        screen: SplashScreen,
+        navigationOptions: {
+            headerShown :false
         }
     },
     newNote: {
@@ -26,6 +32,7 @@ const Stack = createStackNavigator({
     }
     },
     {
+        initialRouteName: 'splashScreen',
         headerMode: 'float',
         headerLayoutPreset: 'center',
         defaultNavigationOptions: {
