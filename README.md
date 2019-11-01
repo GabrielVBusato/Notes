@@ -2,7 +2,7 @@
 
 <img src="/src/images/notes.jpeg"/>
 
-## Configuração para Desenvolvimento
+## Configuração para Instalação
 
 1. Clone o repositório https://github.com/GabrielVBusato/Notes.git;
 2. Instale o as dependências com o comando: npm install;
