@@ -10,10 +10,10 @@ export default StyleSheet.create({
     },
     textHeader:{
         color: '#fff',
-        fontSize: 32,
+        fontSize: 38,
         fontFamily: "AntDesign",
         marginLeft: 10,
-        textDecorationLine: 'underline'
+        fontWeight: 'bold'
     },
     
 })

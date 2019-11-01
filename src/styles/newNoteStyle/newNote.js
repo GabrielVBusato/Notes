@@ -12,12 +12,14 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
         marginLeft: 10,
-        marginTop: 20
+        marginTop: 20,
+        color: 'rgba(52, 52, 52, 1)',
     },
     titleInput: {
         marginHorizontal: 15,
         paddingTop: 5,
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
+        
     },
     descriptionInput:{
         borderWidth:1 ,

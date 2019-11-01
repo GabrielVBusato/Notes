@@ -53,7 +53,8 @@ class NewNote extends Component {
                 <KeyboardAvoidingView behavior="padding" enabled style={content}  >
                     <Text style={titleText}> Título da nota <Text style={{ color: 'red' }}>*</Text> </Text>
                     <TextInput
-                         maxLength= {10}
+                        placeholderTextColor='rgba(52, 52, 52, 0.6)'
+                        maxLength={20}
                         selectTextOnFocus
                         editable={this.state.editable}
                         onFocus={() => {
@@ -74,11 +75,13 @@ class NewNote extends Component {
                             })
                         }} />
                     <Text style={titleText} > Descrição <Text style={{ color: 'red' }}>*</Text> </Text>
-                    <TextInput maxLength= {150} selectTextOnFocus multiline numberOfLines={3} onFocus={() => {
+                    <TextInput maxLength={150} selectTextOnFocus multiline numberOfLines={3} onFocus={() => {
                         this.setState({
                             isTextAreaFocused: true,
                         })
                     }}
+
+                        placeholderTextColor='rgba(52, 52, 52, 0.6)'
                         editable={this.state.editable}
                         onBlur={() => {
                             this.setState({
