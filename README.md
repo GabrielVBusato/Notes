@@ -1,4 +1,4 @@
-## Notas
+## Aplicativo de notas
 
 <img src="/src/images/notes.jpeg"/>
 
