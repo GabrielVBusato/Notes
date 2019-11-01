@@ -1,6 +1,6 @@
 ## Notas
 
-<img src="/src/images/notes"/>
+<img src="/src/images/notes.jpeg"/>
 
 ## Configuração para Desenvolvimento
 
